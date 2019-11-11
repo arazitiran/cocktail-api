@@ -1,0 +1,8 @@
+.card {
+    box-shadow: 0 5px 30px rgba(0,0,0,0.15);
+    border: 0 solid rgba(54,53,55,0.125);
+    border-radius: 5px;
+}
+.nav-style {
+    box-shadow: 0 5px 30px rgba(0,0,0,0.35);
+}
