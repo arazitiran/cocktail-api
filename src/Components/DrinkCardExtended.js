@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import '../components_css/drinkCardExtended.css';
 import { Link } from 'react-router-dom';
 
 let DrinkCardExtended = (props) => {
-    let allDrinks = useSelector(state => state.allDrinks);
-
     let dispatch = useDispatch();
+
+    const stableDispatch = useCallback(dispatch, [])
 
     // Similar to componentDidMount and componentDidUpdate:
     useEffect(() => {
@@ -37,13 +37,14 @@ let DrinkCardExtended = (props) => {
     });
 
     console.log("fired " + JSON.stringify(expendedDrink.idDrink));
-/*     var index = allDrinks.find(e=> e.idDrink = expendedDrink.idDrink);
-    console.log("checks: "+ allDrinks[index+1].idDrink); */
+    let allDrinks = useSelector(state => state.allDrinks);
+    let index = allDrinks.find(e=> e.idDrink = expendedDrink.idDrink);
+    //console.log("checks: "+ allDrinks[index+1].idDrink);
     return (
         <div className="container mt-3">
             <div className="col-lg-8 offset-lg-2">
                 <div className="card bg-dark text-white justify-content-center">
-                    <img className="card-img" src={expendedDrink.strDrinkThumb} alt="Card image" />
+                    <img className="card-img" src={expendedDrink.strDrinkThumb} alt={expendedDrink.strDrink} />
                     <div className="card-img-overlay">
                         <h4 className="card-title">{expendedDrink.strDrink}</h4>
                         <div className="card-text mb-3">
@@ -51,7 +52,7 @@ let DrinkCardExtended = (props) => {
                                 {expendedDrink.strCategory} <br></br>
                                 <h6 className="d-inline">Alcoholic: </h6>
                                 {expendedDrink.strAlcoholic} <br></br>
-                                <h6 className="d-inline">Glass: </h6> 
+                                <h6 className="d-inline">Glass: </h6>
                                 {expendedDrink.strGlass} <br></br>
                             <h5>Instructions: </h5>
                                 {expendedDrink.strInstructions}
@@ -65,9 +66,7 @@ let DrinkCardExtended = (props) => {
                             }
                         </ul>
                         <div className="text-center">
-                        <Link type="button" className="btn btn-default btn-lg"> {/* //to={`/drink-card/${thisid}`}  */}
-                        <i className="fa fa-long-arrow-right fa-lg"></i>
-                          </Link>
+
                         </div>
 
                     </div>
@@ -78,3 +77,9 @@ let DrinkCardExtended = (props) => {
 }
 
 export default DrinkCardExtended;
+
+// to be added:
+/*
+<Link type="button" to={`/drink-card/${index+1}`} className="btn btn-default btn-lg">
+<i className="fa fa-long-arrow-right fa-lg"></i>
+</Link> */

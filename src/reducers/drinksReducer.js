@@ -25,6 +25,7 @@ export function drinksReducer(state = initState, action) {
         case "SCHEDULE_FROM_STORAGE": {
                 let daysDrinkStorage = localStorage.getItem("daysDrink");
                 console.log("my days drink is " + daysDrinkStorage);
+                console.log(daysDrinkStorage == null);
                // return {...state}
                return (daysDrinkStorage == null ?  {...state} :  {...state, daysDrink: JSON.parse(daysDrinkStorage) });
         }

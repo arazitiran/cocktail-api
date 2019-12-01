@@ -2,10 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import '../components_css/drinkCardExtended.css';
 import { Link } from 'react-router-dom';
-//import { DragSource } from 'react-dnd'
 import { useDrag } from 'react-dnd'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 
 let DrinkCard = ({ idDrink, onRemove, day }) => {
@@ -58,4 +55,4 @@ let DrinkCard = ({ idDrink, onRemove, day }) => {
      ); 
 }
 
-export default DrinkCard/* DragSource("card", cardSource, collect)() */
+export default DrinkCard

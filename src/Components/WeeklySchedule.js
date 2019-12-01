@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch, useStore } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import DrinkCard from './DrinkCard'
 import DayPanel from './DayPanel'
 
@@ -13,6 +13,7 @@ let WeeklySchedule = (props) => {
  
   useEffect(() => {
     dispatch({ type: "SCHEDULE_FROM_STORAGE", payload: {} });
+    console.log("dispatched: " + JSON.stringify(daysDrink))
   }, []);
   
   useEffect(() => {
@@ -29,8 +30,7 @@ let WeeklySchedule = (props) => {
       // Delete this item from the other day-panel
       if (item.day)  dispatch({ type: "DELETE_DRINK_FROM_DAY", payload: { idDrink: item.idDrink, day: item.day } });
 
-      // Save the result on localstorage
-     localStorage.setItem("daysDrink",  JSON.stringify(daysDrink));
+      // Save the result on localstorage in use effect
     };
 
   return (
@@ -51,13 +51,15 @@ let WeeklySchedule = (props) => {
                 <div className="col-8 pr-10">
                     <table className="table">
                       <thead>
+                        <tr>
                         <th>Sunday</th>
                         <th>Monday</th>
                         <th>Teusday</th>
                         <th>Wendsday</th>
                         <th>Thursday</th>
                         <th>Friday</th>
-                        <th>Satr</th>
+                        <th>Satr</th> 
+                        </tr>
                       </thead>
                       <tbody>
                       <tr>
@@ -77,8 +79,8 @@ let WeeklySchedule = (props) => {
                     <div className="row justify-content-center align-self-center w-100">
                       {allFavoritesDrinks.map((drink) => {
                         return (
-                          <div className="col-lg-6 col-md-6 py-2" >
-                            <DrinkCard key={drink.idDrink} idDrink={drink.idDrink} />
+                          <div key={drink.idDrink} className="col-lg-6 col-md-6 py-2" >
+                            <DrinkCard  key={drink.idDrink} idDrink={drink.idDrink} />
                           </div>
                         )
                       })}
