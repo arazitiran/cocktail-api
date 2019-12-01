@@ -6,3 +6,26 @@
 .nav-style {
     box-shadow: 0 5px 30px rgba(0,0,0,0.35);
 }
+td {
+    word-wrap:break-word;
+    word-break:break-all;
+   min-width: 13% !important;
+   width: 13% !important;
+  }
+table {
+    table-layout: fixed;
+    word-wrap: break-word;
+  }
+.card-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.draggingDiv {
+overflow-y: scroll;
+height: 50rem;
+box-shadow: 0 5px 30px rgba(50,0,0,0.85);
+}
+.pr-10 {
+    padding-right: 10rem !important;
+}

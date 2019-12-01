@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import '../components_css/drinkCardExtended.css';
+import { Link } from 'react-router-dom';
 
-let DrinkCard = (props) => {
+let DrinkCardExtended = (props) => {
     let allDrinks = useSelector(state => state.allDrinks);
-    let expendedDrink = useSelector(state => state.expendedDrink);
+
     let dispatch = useDispatch();
 
     // Similar to componentDidMount and componentDidUpdate:
@@ -12,7 +13,7 @@ let DrinkCard = (props) => {
         dispatch({ type: "FETCH_DATA_EXPENDED", payload: { idDrink: props.match.params.idDrink } });
     }, []);
 
-
+    let expendedDrink = useSelector(state => state.expendedDrink);
     let getFollowingPropsToArray = (propName) => {
 
         // vars
@@ -35,35 +36,45 @@ let DrinkCard = (props) => {
         return getIngredientsSizes[index] + " / " + ingredient;
     });
 
-    console.log("fired " + JSON.stringify(expendedDrink));
-    let currentDrink = allDrinks.find(e => e.idDrink === props.match.params.idDrink);
+    console.log("fired " + JSON.stringify(expendedDrink.idDrink));
+/*     var index = allDrinks.find(e=> e.idDrink = expendedDrink.idDrink);
+    console.log("checks: "+ allDrinks[index+1].idDrink); */
     return (
-        <div class="container mt-3">
-            <div class="col-lg-8 offset-lg-2">
-                <div class="card bg-dark text-white">
-                    <img class="card-img" src={expendedDrink.strDrinkThumb} alt="Card image" />
-                    <div class="card-img-overlay">
-                        <h4 class="card-title">{expendedDrink.strDrink}</h4>
-                        <p class="card-text">
-                            <p> {expendedDrink.strCategory} <br></br>
+        <div className="container mt-3">
+            <div className="col-lg-8 offset-lg-2">
+                <div className="card bg-dark text-white justify-content-center">
+                    <img className="card-img" src={expendedDrink.strDrinkThumb} alt="Card image" />
+                    <div className="card-img-overlay">
+                        <h4 className="card-title">{expendedDrink.strDrink}</h4>
+                        <div className="card-text mb-3">
+                                <h6 className="d-inline">Category: </h6>
+                                {expendedDrink.strCategory} <br></br>
+                                <h6 className="d-inline">Alcoholic: </h6>
                                 {expendedDrink.strAlcoholic} <br></br>
+                                <h6 className="d-inline">Glass: </h6> 
                                 {expendedDrink.strGlass} <br></br>
+                            <h5>Instructions: </h5>
                                 {expendedDrink.strInstructions}
-                            </p>
-                        </p>
-                        <ul >
+                        </div>
+                        <h5>Ingredients: </h5>
+                        <ul className="fa-ul">
                             {
-                                connectIngredientsWithMesauers.map((ingredient) => {
-                                    return <li > {ingredient} </li>
+                                connectIngredientsWithMesauers.map((ingredient, i) => {
+                                    return <li key={i}> <i className="fa-li fa fa-square"></i> {ingredient} </li>
                                 })
                             }
                         </ul>
+                        <div className="text-center">
+                        <Link type="button" className="btn btn-default btn-lg"> {/* //to={`/drink-card/${thisid}`}  */}
+                        <i className="fa fa-long-arrow-right fa-lg"></i>
+                          </Link>
+                        </div>
+
                     </div>
                 </div>
             </div>
-
         </div>
     );
 }
 
-export default DrinkCard;
+export default DrinkCardExtended;
